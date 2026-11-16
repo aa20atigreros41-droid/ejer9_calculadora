@@ -24,7 +24,7 @@ jobs:
               run:  javac -d out $(find src -name "*.java")
                 
             - name: Ejecutar tests
-              run: java -ea -cp out/CalculadoraTest
+              run: java -ea -cp out CalculadoraTest
                
             - name: Crear jar
               run: java cfe out/calculadora.jar Main -C out
