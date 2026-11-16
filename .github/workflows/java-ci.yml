@@ -3,7 +3,7 @@ name: Probar funcionamiento de calculadora
 on: [ push ]
 
 jobs:
-    Probar calculadora:
+    probar_calculadora:
         name: Compilar y guardar .class
         runs-on: ubuntu-latest
         
