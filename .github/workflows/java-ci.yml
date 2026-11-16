@@ -1,0 +1,40 @@
+name: Probar funcionamiento de calculadora
+
+on: [ push ]
+
+jobs:
+    Probar calculadora:
+        name: Compilar y guardar .class
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: Descargar repositorio
+              uses: actions/checkout@v5
+            
+            - name: COnfigurar Java
+              uses: actions/setup-java@v4
+              with:
+                distribution: temurin
+                java-version: '21'
+                
+            - name: Crear directorio de salida
+              run: mkdir -p out
+              
+            - name: Compilar y guardar   
+              run:  javac -d out $(find src -name "*.java")
+                
+            - name: Ejecutar tests
+              run: java -ea -cp out/CalculadoraTest
+               
+            - name: Crear jar
+              run: java cfe out/calculadora.jar Main -C out
+              
+            - name: Ejecutar calculadora.jar
+              run: java -jar out/calculadora.jar
+              
+            - name: Subir artefacto
+              uses: actions/upload-artifact@v5
+              with:
+                name: calculadora-java
+                path: out/calculadora.jar
+                
