@@ -21,7 +21,7 @@ jobs:
               run: mkdir -p out
               
             - name: Compilar y guardar   
-              run:  javac -d out $(find src -name "*.java")
+              run:  javac -d out src/*.java
                 
             - name: Ejecutar tests
               run: java -ea -cp out CalculadoraTest
